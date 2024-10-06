@@ -23,6 +23,8 @@ Nos apoyaremos del Censo General de Población y Vivienda de varios años para o
 
 ## Project Organization
 
+```
+├── LICENSE            <- Open-source license if one is chosen
 ├── Makefile           <- Makefile with convenience commands like `make data` or `make train`
 ├── README.md          <- The top-level README for developers using this project.
 ├── data
@@ -46,3 +48,7 @@ Nos apoyaremos del Censo General de Población y Vivienda de varios años para o
 │                         salud_mental-educacion and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+│
+```
+
+--------
