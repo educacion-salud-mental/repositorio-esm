@@ -130,6 +130,7 @@ def crear_archivo_texto(nombre_archivo):
     os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
 
     with open(ruta_guardado, 'w') as archivo:
+        archivo.write("Datos de la encuesta ENSANUT y datos para la creacion de mapa descargados:\n")
         archivo.write(f"Fecha de descarga: {fecha_hoy}\n")
         archivo.write("\n")
         archivo.write("La Encuesta Nacional de Salud y Nutrición (ENSANUT) es un proyecto del Instituto Nacional de Salud Pública\n")
@@ -141,11 +142,12 @@ def crear_archivo_texto(nombre_archivo):
         archivo.write("preguntas hechas a adolescentes de 10 a 19 años. La carpeta 'DATOS-ADULTOS' contiene lo propio para los cuestionarios\n")
         archivo.write("del apartado de salud para personas de 20 años en adelante.\n")
         archivo.write("\n")
-        archivo.write("Los catalogos se pueden encontrar en la carpeta docs, en dicha carpeta hay diccionario de datos para adolescentes y adultos\n")
+        archivo.write("Los catalogos se pueden encontrar en la carpeta references, en dicha carpeta hay diccionario de datos para adolescentes y adultos\n")
         archivo.write("los cuales tendrán la misma fecha de descarga que los datos.\n")
         archivo.write("\n")
-        archivo.write("Se incluye tambien la descarga de un archivo .zip, posteriormente descomprime. Este archivo contiene la informacion\n")
+        archivo.write("Se incluye tambien la descarga de un archivo .zip, posteriormente se descomprime. Este archivo contiene la informacion\n")
         archivo.write("Para crear un mapa de la republica mexicana con division politica, en nuestro caso usaremos solamente los estados.")
+        
 
 
 
