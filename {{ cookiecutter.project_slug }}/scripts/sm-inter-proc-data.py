@@ -6,6 +6,35 @@ import pandas as pd
 import numpy as np
 import geopandas as gpd
 
+def crear_archivo_texto(nombre_archivo):
+    """
+    Crea un archivo de texto con la fecha actual y un mensaje de descripción.
+
+    Args:
+        nombre_archivo (str): Nombre del archivo de texto a crear.
+    """
+    fecha_hoy = datetime.now().strftime("%d/%m/%Y %H:%M")
+
+    ruta_guardado = os.path.join('..', 'Data', 'processed', nombre_archivo)
+
+    os.makedirs(os.path.dirname(ruta_guardado), exist_ok=True)
+
+    with open(ruta_guardado, 'w') as archivo:
+        archivo.write("Datos de Ensanut procesados:\n")
+        archivo.write(f"Fecha de ejecución: {fecha_hoy}\n")
+        archivo.write("\n")
+        archivo.write("Los datos de ENSANUT en el apartado de salud ahora están concatenados.\n")
+        archivo.write("Apartir de los raw data, se tomaron las columnas con la edad, sexo, entidad, fecha de entrevista, preguntas relacionadas a su salud mental,\n")
+        archivo.write("las preguntas seleccionadas fueron '¿Alguna vez a propósito se ha herido, cortado,  intoxicado o hecho daño con el fin de quitarse la vida?',\n")
+        archivo.write("'Durante la última semana...¿se sintió deprimido(a)?' y 'Durante la última semana...¿se sintió triste?'.\n")
+        archivo.write("Posteriormente los dataframes abtenidos se concatenaron, agregaron una nueva columna con el nombre de la entidad federativa y se les hicieron\n")
+        archivo.write("las pruebas de calidad de datos básicas, por ejemplo formatear el tipo de dato, unificar los resultados de los cuestionarios, sustituir\n")
+        archivo.write("datos perdidos.\n")
+        archivo.write("\n")
+        archivo.write("También, se incluye un catálogo de estos nuevos datos, el cual está ubicado en la carpeta references.")
+        
+
+
 
 def main():
   file_path = os.path.join('..', 'Data', 'raw', 'DATOS ADOLESCENTES', 'ENSANUT-Adolescentes-Datos-2006.csv')
@@ -193,7 +222,7 @@ def main():
 
   file_path = os.path.join('..', 'Data', 'processed', 'Ensanut-data-p.csv')
   df_combinado.to_csv(file_path, index=False, encoding='utf-8-sig')
-
+  crear_archivo_texto('datos_ENSANUT_info.txt')
 
 if __name__ == "__main__":
     main()
