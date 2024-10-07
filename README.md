@@ -102,5 +102,7 @@ Este documento proporciona los pasos necesarios para instalar Anaconda, Python, 
 Para crear un ambiente virtual con Anaconda, ejecuta el siguiente comando, reemplazando `nombreEntornoVirtual` con el nombre que deseas para tu ambiente y `3.x` con la versión de Python que desees (si es necesario):
 
 ```bash
-conda create --name nombreEntornoVirtual python=3.x
-
+conda create --name nombreEntornoVirtual -> crea el entorno virtual
+conda activate nombreEntornoVirtual -> activa el entorno virtual
+conda deactivate -> en caso de quere salir del entorno virtual es posible desactivarlo para volver al entorno base
+conda env update --file environment.yml -> actualiza el archivo environment.yml en caso de instalar más paquetes o librerías
