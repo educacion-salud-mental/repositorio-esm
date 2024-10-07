@@ -42,13 +42,12 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 │                         proyecto.
 │        
 ├── models             <- Trained and serialized models, model predictions, or model summaries
+├── pipelines          <- Data processing pipelines or trained and serialized models
+├── evaluetion         <- Model evaluations, metrics, and reports
 │
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         salud_mental-educacion and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
