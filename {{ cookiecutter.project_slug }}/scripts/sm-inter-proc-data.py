@@ -1,3 +1,4 @@
+from dateutil import parser
 from datetime import datetime
 import os
 import requests
@@ -55,8 +56,12 @@ def agregar_fecha(df, fecha):
         df (DataFrame): Nombre del dataframe.
         fecha (str): Fecha del archivo.
     '''
-    df['Fecha'] = pd.to_datetime(fecha)
+    try:
+        df['Fecha'] = pd.to_datetime(fecha, dayfirst=True, errors='coerce')
+    except Exception as e:
+        print(f"Error al agregar la fecha: {e}")
     return df
+
 
 def filtrar_columnas(df, columnas_interes):
     '''Función para filtrar columnas de interés que están presentes en el DataFrame
@@ -83,9 +88,16 @@ def concatenar_y_guardar(dataframes, file_path):
     Args:
         dataframes (list): Dataframes a concatenar.
         file_path (Path): Direccion para guardar el archivo.'''
+    
+    # Concatenar los DataFrames
     df_concat = pd.concat(dataframes, axis=0, ignore_index=True)
-    df_concat['Fecha'] = pd.to_datetime(df_concat['Fecha'], errors='coerce') 
+    
+    # Aplicar limpieza de fechas
+    df_concat['Fecha'] = df_concat['Fecha'].apply(lambda x: pd.to_datetime(x, dayfirst=True, errors='coerce'))
+
+    # Guardar el DataFrame en archivo CSV
     df_concat.to_csv(file_path, index=False)
+
 
 def procesar_y_guardar(rutas_archivos, fechas, columnas_interes, renombrar_columnas_map, archivo_salida, l , m):
     '''Función para procesar y concatenar archivos
@@ -135,39 +147,13 @@ def cargar_y_concatenar_datos(file_path_adol, file_path_adul, output_file):
     return output_file
 
 
-def fusionar_con_mapa(file_path_csv, file_path_shp):
-    '''Función para fusionar datos ENSA con shapefile de mapas
-     Args:
-        file_path_csv (Path: Path del archivo concatenado.
-        file_path_shp (Path): Path del archivo shp con la informacion del mapa.
-    '''
-    # Cargar el CSV y el archivo .shp
-    datos_ensa = pd.read_csv(file_path_csv, encoding='latin-1',low_memory=False)
-    datos_mapa = gpd.read_file(file_path_shp, encoding='latin-1')
-
-    # Ajustar tipos de datos para la fusión
-    datos_ensa['Entidad'] = datos_ensa['Entidad'].astype(int)
-    datos_mapa['CVE_ENT'] = datos_mapa['CVE_ENT'].astype(int)
-
-    # Fusionar los DataFrames en la columna 'Entidad' y 'CVE_ENT'
-    df_combinado = pd.merge(datos_ensa, datos_mapa, left_on='Entidad', right_on='CVE_ENT', how='left')
-
-    # Convertir a GeoDataFrame y renombrar columnas
-    df_combinado = gpd.GeoDataFrame(df_combinado, geometry='geometry')
-    df_combinado = df_combinado.drop(columns=['CVE_ENT', 'CVEGEO', 'geometry'])
-    df_combinado = df_combinado.rename(columns={'NOMGEO': 'Entidad', 'Entidad': 'C_Entidad'})
-
-    # Seleccionar las columnas de interés
-    df_combinado = df_combinado[['Edad', 'Sexo', 'C_Entidad', 'Entidad', 'Fecha', 'Atentar_contras_si', 'Depresion', 'Tristeza']]
-
-    return df_combinado
 
 
 def limpiar_y_transformar(df_combinado):
     '''Función para limpiar y transformar el DataFrame combinado
     
     Args:
-        df_cambinado (DataFrame): Dataframe que se va a limpiar.
+        df_combinado (DataFrame): Dataframe que se va a limpiar.
     '''
     # Reemplazar valores vacíos o nulos
     df_combinado = df_combinado.replace(['', ' ', '9'], np.nan)
@@ -177,13 +163,24 @@ def limpiar_y_transformar(df_combinado):
     df_combinado['Edad'] = df_combinado['Edad'].astype(int)
     df_combinado['Sexo'] = df_combinado['Sexo'].astype('category')
     df_combinado['Entidad'] = df_combinado['Entidad'].astype('category')
-    df_combinado['Fecha'] = pd.to_datetime(df_combinado['Fecha'], errors='coerce')
+    
+    # Unificar formato de fecha utilizando una detección automática con parser
+    def parse_fecha(fecha):
+        try:
+            return parser.parse(fecha, dayfirst=True)
+        except (ValueError, TypeError):
+            return np.nan
+
+    df_combinado['Fecha'] = df_combinado['Fecha'].apply(parse_fecha)
+    
+    # Convertir otros tipos de datos
     df_combinado['Atentar_contras_si'] = df_combinado['Atentar_contras_si'].astype('category')
     df_combinado['Depresion'] = df_combinado['Depresion'].astype('category')
     df_combinado['Tristeza'] = df_combinado['Tristeza'].astype('category')
     df_combinado['C_Entidad'] = df_combinado['C_Entidad'].astype('category')
 
     return df_combinado
+
 
 
 def procesar_datos_ensanut():
@@ -235,8 +232,8 @@ def main():
     ]
 
 
-    fechas_1 = ['2006-07-01', '2012-01-07', '2018-07-01', None, None, None, None]
-    fechas_2 = ['2006-07-01', '2012-01-07', '2018-07-01', None, None, None, None]
+    fechas_1 = ['31-07-2006', '31-07-2012', '31-07-2018', None, None, None, None]
+    fechas_2 = ['31-07-2006', '31-07-2012', '31-07-2018', None, None, None, None]
 
 
 
