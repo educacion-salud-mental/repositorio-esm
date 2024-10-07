@@ -61,24 +61,46 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 ## Requisitos Previos
 Para seguir esta guía, necesitarás acceso a Internet y permisos de instalación en tu sistema.
 
----
+----------------
 
-## 1. Instalar Anaconda
+# Guía de Configuración del Entorno
 
-### Paso 1: Descargar el Instalador
-1. Visita la página oficial de Anaconda: [https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution).
-2. Selecciona la versión correspondiente a tu sistema operativo (Windows, macOS o Linux) y descárgala.
+Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
 
-### Paso 2: Instalar Anaconda
-- En **Windows/macOS**: Ejecuta el instalador descargado y sigue las instrucciones en pantalla.
-- En **Linux**: Abre una terminal y ejecuta el siguiente comando para iniciar la instalación:
+## 1. Verificación e Instalación de Anaconda
+
+### Verificar si Anaconda está instalado:
+1. Abre una terminal y ejecuta el siguiente comando:
 
     ```bash
-    bash ~/Downloads/Anaconda3-2024.XX-Linux-x86_64.sh
+    conda --version
     ```
 
-### Paso 3: Verificar la Instalación
-Una vez completada la instalación, abre una terminal o el `Anaconda Prompt` y ejecuta:
+2. Si el comando anterior muestra una versión de Conda, significa que Anaconda está instalada. Si no aparece, sigue los pasos de instalación a continuación.
+
+### Instalación de Anaconda:
+1. Descarga el instalador de Anaconda desde [aquí](https://www.anaconda.com/products/individual#download-section).
+2. Ejecuta el instalador y sigue las instrucciones en pantalla.
+3. Reinicia tu terminal y verifica la instalación con el siguiente comando:
+
+    ```bash
+    conda --version
+    ```
+
+## 2. Instalación de Python
+
+1. Python viene incluido con Anaconda. Para verificar la versión de Python instalada, ejecuta:
+
+    ```bash
+    python --version
+    ```
+
+2. Si deseas instalar una versión específica de Python, puedes hacerlo creando un ambiente con esa versión (ver el siguiente paso).
+
+## 3. Crear un Ambiente Virtual con Anaconda
+
+Para crear un ambiente virtual con Anaconda, ejecuta el siguiente comando, reemplazando `nombreEntornoVirtual` con el nombre que deseas para tu ambiente y `3.x` con la versión de Python que desees (si es necesario):
 
 ```bash
-conda --version
+conda create --name nombreEntornoVirtual python=3.x
+
