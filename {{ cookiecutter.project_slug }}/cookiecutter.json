@@ -4,6 +4,5 @@
     "project_description": "Descarga de datos de la web",
     "python_version": "3.11",
     "author": ["Federico Cirret Torres", "Kevin Garcia Mundo", 
-                "Sebastián Isaac Vega Robles", "Profesor"],
-    "":""
+                "Sebastián Isaac Vega Robles", "Profesor"]
 }
