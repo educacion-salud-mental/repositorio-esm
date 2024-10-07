@@ -54,3 +54,31 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 ```
 
 --------
+
+
+# Guía de Instalación y Uso de Anaconda
+
+## Requisitos Previos
+Para seguir esta guía, necesitarás acceso a Internet y permisos de instalación en tu sistema.
+
+---
+
+## 1. Instalar Anaconda
+
+### Paso 1: Descargar el Instalador
+1. Visita la página oficial de Anaconda: [https://www.anaconda.com/products/distribution](https://www.anaconda.com/products/distribution).
+2. Selecciona la versión correspondiente a tu sistema operativo (Windows, macOS o Linux) y descárgala.
+
+### Paso 2: Instalar Anaconda
+- En **Windows/macOS**: Ejecuta el instalador descargado y sigue las instrucciones en pantalla.
+- En **Linux**: Abre una terminal y ejecuta el siguiente comando para iniciar la instalación:
+
+    ```bash
+    bash ~/Downloads/Anaconda3-2024.XX-Linux-x86_64.sh
+    ```
+
+### Paso 3: Verificar la Instalación
+Una vez completada la instalación, abre una terminal o el `Anaconda Prompt` y ejecuta:
+
+```bash
+conda --version
