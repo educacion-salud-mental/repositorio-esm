@@ -1,119 +1,28 @@
 import os
 import pandas as pd
 import re
+
 os.chdir("../Data/raw/DATOS EDUCACION")
 
-COLUMNS=[
-       'Entidad Federativa',
-       'Clave del Municipio',
-       'Municipio',
-       'Clave de Localidad',
-       'Localidad', 'Longitud', 'Latitud', 'Altitud', 
-       'Población total','Población masculina', 'Población femenina',
-       # Columnas relacionadas con la educacion
-       'Población de 8 a 14 años que no sabe leer y escribir',
-       'Población masculina de 8 a 14 años que no sabe leer y escribir',
-       'Población femenina de 8 a 14 años que no sabe leer y escribir',
-       'Población de 15 años y más analfabeta',
-       'Población masculina de 15 años y más analfabeta',
-       'Población femenina de 15 años y más analfabeta',
-       'Población de 5 años que no asiste a la escuela',
-       'Población masculina de 5 años que no asiste a la escuela',
-       'Población femenina de 5 años que no asiste a la escuela',
-       'Población de 6 a 11 años que no asiste a la escuela',
-       'Población de 6 a 14 años que no asiste a la escuela',
-       'Población masculina de 6 a 14 años que no asiste a la escuela',
-       'Población femenina de 6 a 14 años que no asiste a la escuela',
-       'Población de 12 a 14 años que no asiste a la escuela',
-       'Población de 15 a 24 años que asiste a la escuela',
-       'Población masculina de 15 a 24 años que asiste a la escuela',
-       'Población femenina de 15 a 24 años que asiste a la escuela',
-       'Población de 15 años y más sin escolaridad',
-       'Población masculina de 15 años y más sin escolaridad',
-       'Población femenina de 15 años y más sin escolaridad',
-       'Población de 15 años y más con educación básica incompleta',
-       'Población masculina de 15 años y más con educación básica incompleta',
-       'Población femenina de 15 años y más con educación básica incompleta',
-       'Población de 15 años y más con educación básica completa',
-       'Población masculina de 15 años y más con educación básica completa',
-       'Población femenina de 15 años y más con educación básica completa',
-       'Población de 15 años y más con educación posbásica',
-       'Población masculina de 15 años y más con educación posbásica',
-       'Población femenina de 15 años y más con educación posbásica',
-       'Grado promedio de escolaridad',
-       'Grado promedio de escolaridad de la población masculina',
-       'Grado promedio de escolaridad de la población femenina',
-         ]
-
-## Formatos de las columnas
-STRING_COLUMNS=[
-       'Entidad Federativa',
-       'Clave del Municipio',
-       'Municipio',
-       'Clave de Localidad',
-       'Localidad',
-]
-FLOAT_COLUMNS=[
-    'Longitud', 'Latitud', 'Altitud',
-    'Grado promedio de escolaridad',
-    'Grado promedio de escolaridad de la población masculina',
-    'Grado promedio de escolaridad de la población femenina',
-
-]
-INTEGER_COLUMNS=[
-       'Población total','Población masculina', 'Población femenina',
-       'Población de 8 a 14 años que no sabe leer y escribir',
-       'Población masculina de 8 a 14 años que no sabe leer y escribir',
-       'Población femenina de 8 a 14 años que no sabe leer y escribir',
-       'Población de 15 años y más analfabeta',
-       'Población masculina de 15 años y más analfabeta',
-       'Población femenina de 15 años y más analfabeta',
-       'Población de 5 años que no asiste a la escuela',
-       'Población masculina de 5 años que no asiste a la escuela',
-       'Población femenina de 5 años que no asiste a la escuela',
-       'Población de 6 a 11 años que no asiste a la escuela',
-       'Población de 6 a 14 años que no asiste a la escuela',
-       'Población masculina de 6 a 14 años que no asiste a la escuela',
-       'Población femenina de 6 a 14 años que no asiste a la escuela',
-       'Población de 12 a 14 años que no asiste a la escuela',
-       'Población de 15 a 24 años que asiste a la escuela',
-       'Población masculina de 15 a 24 años que asiste a la escuela',
-       'Población femenina de 15 a 24 años que asiste a la escuela',
-       'Población de 15 años y más sin escolaridad',
-       'Población masculina de 15 años y más sin escolaridad',
-       'Población femenina de 15 años y más sin escolaridad',
-       'Población de 15 años y más con educación básica incompleta',
-       'Población masculina de 15 años y más con educación básica incompleta',
-       'Población femenina de 15 años y más con educación básica incompleta',
-       'Población de 15 años y más con educación básica completa',
-       'Población masculina de 15 años y más con educación básica completa',
-       'Población femenina de 15 años y más con educación básica completa',
-       'Población de 15 años y más con educación posbásica',
-       'Población masculina de 15 años y más con educación posbásica',
-       'Población femenina de 15 años y más con educación posbásica',
-    
-]
-FORMAT_COLUMNS={
-    'string_columns':STRING_COLUMNS,
-    'float_columns':FLOAT_COLUMNS,
-    'integer_columns':INTEGER_COLUMNS
-
-}
 
 # Censos de Población y Vivienda
-CENSOS_DE_POBLACION_Y_VIVIENDA_PATH="./CENSOS DE POBLACION Y VIVIENDA"
+CENSOS_DE_POBLACION_Y_VIVIENDA_PATH="./CENSOS DE POBLACION Y VIVIENDA"# Ruta en donde se encuentran los datos de Censos
 work_directory=CENSOS_DE_POBLACION_Y_VIVIENDA_PATH
 
+"""
+Se cargan los datos a un dataframe por archivo, y se guardan en una lista.
 
+"""
 dataframes=[]
 diccionarios_de_datos=[]
 for item in os.listdir(work_directory):
     item_path=f"{work_directory}/{item}"
+    # En caso de tratarse de un archivo resultado de una extracción zip:
     if os.path.isdir(item_path):
         file_name=os.listdir(f"{item_path}/conjunto_de_datos")[0]
         file_path=f"{item_path}/conjunto_de_datos/{file_name}"
         df=pd.read_csv(file_path)
-        
+    # Se busca un archivo diccionario de datos y se guarda el dataframe de este en la lista de diccionarios
         pattern = r"^diccionario.*datos$"
         for subitem in os.listdir(item_path):
             match = re.search(pattern,subitem)
@@ -123,7 +32,7 @@ for item in os.listdir(work_directory):
         data_dictionary_path=f"{item_path}/{dictionary_name}/{os.listdir(f"{item_path}/{dictionary_name}")[0]}"
         dictionary_df=pd.read_csv(data_dictionary_path,encoding='ISO-8859-1')
         diccionarios_de_datos.append(dictionary_df)
-
+    # En este caso particular, el resto de los archivos son de tipo excel
     else:
         file_path=item_path
         df=pd.read_excel(file_path,sheet_name=1,skiprows=4)
@@ -133,7 +42,17 @@ for item in os.listdir(work_directory):
 
 ## Filtro columnas
 
-def filtro_columnas(df,dictionary_dataframe,columns=COLUMNS):
+def filtro_columnas(df,dictionary_dataframe,columns):
+    """
+    df: Dataframe de los datos que se quieren utilizar
+    diciontary_dataframe: Dataframe de diccionario de datos asociado con el dataframe en uso
+    columns:Lista de columnas que se mantendran en el dataframe
+
+    Esta función primero traduce los mnemónicos del dataframe en uso a sus nombres completos utilizando
+    el dataframe del diccionario de datos. Luego, se filtran las clolumnas que se quieren usar en el d-
+    ataframe original.
+
+    """
     rename_dictionary={}
     for index,row in dictionary_dataframe.iterrows():
         old_column_name=row['mnemonico']
@@ -147,6 +66,12 @@ def filtro_columnas(df,dictionary_dataframe,columns=COLUMNS):
 ## Revision de nulos:
 
 def revision_nulos(df):
+    """
+    df:Dataframe que se quiere analizar
+
+    Esta función recibe el dataframe que se quiere analizar para imprimir el porcentaje de registros nulos
+    por cada columna del dataframe.
+    """
     total_rows=len(df)
     for column in df.columns:
         nans=0
@@ -156,12 +81,20 @@ def revision_nulos(df):
     
 ## Calidad de datos 
 
-# Primero hacemos un diccionario que contiene el formato en la que conviene guardar cada columna
+def formato_columnas(df,format_columns):
+    """
+    df:Dataframe que se quiere analizar
+    format_columns: Diccionario en donde las llaves siguen la estructura '<tipo_dato>_columns' y los valores
+    son listas de los nombres de las columnas que se quieren guardar bajo el tipo de dato de la llave.
 
-def formato_columnas(df,format_columns=FORMAT_COLUMNS):
+
+    Esta función primero genera un diccionario donde las llaves son el nombre de la columna dentro
+    del dataframe, y los valores son el tipo de dato en la que se quieren guardar. Luego, intenta 
+    actualizar el tipo de dato que sigue cada columna. Si se encuentra con un error ValueError, 
+    guarda la columna y el valor que causó el error en una lista llamada error_columns. Esta lista 
+    es lo que entrega al final
+    """
     formats={}
-
-
     for string_column in format_columns['string_columns']:
         formats[string_column]='str'
 
@@ -183,10 +116,10 @@ def formato_columnas(df,format_columns=FORMAT_COLUMNS):
             error_columns.append([column,error_value])  # Store the column name
             #print(f"Error al formatear la columna '{column}' a '{format_type}': {e}")
 
-    if len(error_columns)!=0:
-        for error_column in error_columns:
-                percentage=100*round(len(df[df[error_column[0]]==error_column[1]])/len(df),2)
-                print(f"{percentage}% de los registros en {error_column[0]} son {error_column[1]} ")
+    #if len(error_columns)!=0:
+    #    for error_column in error_columns:
+    #            percentage=100*round(len(df[df[error_column[0]]==error_column[1]])/len(df),2)
+    #            print(f"{percentage}% de los registros en {error_column[0]} son {error_column[1]} ")
                 #df=df[~(df[error_column[0]]==error_column[1])]
                 #print(f"Se omitieron los registros erroneos en {error_column[0]} exitosamente!")
     return error_columns
