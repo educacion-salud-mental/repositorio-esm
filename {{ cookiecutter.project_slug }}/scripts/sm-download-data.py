@@ -3,6 +3,7 @@ import os
 import requests
 import zipfile
 import shutil
+
 def descargar_archivo_xlsx(url, data, folder_name, file_name):
   """Descarga un archivo .xlsx de una URL y lo guarda en la carpeta especificada.
   Args:
@@ -385,3 +386,5 @@ def main():
     
 if __name__ == "__main__":
     main()
+    #ejecutamos archivo "sm-inter-proc-data.py"
+    os.system("python3 sm-inter-proc-data.py")
