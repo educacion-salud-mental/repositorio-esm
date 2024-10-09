@@ -1,3 +1,4 @@
+![MCD](https://mcd.unison.mx/wp-content/themes/awaken/img/logo_mcd.png)
 # Proyecto de ingeniería de características 
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
