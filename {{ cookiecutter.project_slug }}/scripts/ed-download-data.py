@@ -9,19 +9,41 @@ working_directory=".."
 data_path="./Data/raw/DATOS EDUCACION"
 
 def nombre_archivo(url):
+    """
+    url:URL de descarga del archivo que se quiere extraer el nombre
+
+    Esta función recibe el  url de un archivo, y arroja el nombre del archivo con y sin el tipo de formato en el que esta guardado.
+    """
+    # Nombre con el tipo de formato incluido
     indices=[index for index in range(len(url)) if url[index]=="/"]
     last_slash=indices[-1]
     file_name_with=url[last_slash+1:]
+
+    # Nombre sin el tipo de formato incluido
     indices=[index for index in range(len(file_name_with)) if file_name_with[index]=="."]
     last_point=indices[-1]
     file_name_without=file_name_with[last_point+1:]
+
     return {'with':file_name_with,'without':file_name_without}
+
+def formato_de_archivo(url):
+    """
+    url:URL de descarga del archivo que se quiere extraer el formato en el que esta guardado
+
+    Esta función recibe el  url de un archivo, y arroja el nombre del tipo de formato en el que esta guardado.
+    """
+    file_name=nombre_archivo(url)['with']
+    indices=[index for index in range(len(file_name)) if file_name[index]=="."]
+    last_point=indices[-1]
+    return file_name[last_point+1:]
 
 def descargar_archivo_zip(url,file_name="",folder=""):
     """ 
     url: URL de descarga
     folder: El nombre de la carpeta en donde se guardaran los datos descargados
     file_name: Nombre del archivo extraído
+
+    Esta función 
     """
     # Creamos el directorio de extracción en caso de no existir
     
@@ -129,12 +151,44 @@ ccpv_siglo_XXI= [
 
 # Descargar datos del censo del siglo XX
 for item in ccpv_siglo_XX:
-    descargar_archivo_xlsx(item["url"], item["file_name"], "CENSOS DE POBLACION Y VIVIENDA")
+    folder="CENSOS DE POBLACION Y VIVIENDA"# Configurar
+
+    folder_path=f"{data_path}/{folder}"
+    descargar_archivo_xlsx(item["url"], item["file_name"], folder)
+    download_date = datetime.now().strftime("%Y-%m-%d")
+    format=formato_de_archivo(item["url"])
+    size=os.path.getsize(f"{folder_path}/{item['file_name']}")
+    string=f"""
+           Nombre:{item['file_name']}\n
+           Fecha de descarga:{download_date}\n
+           Formato:{format}\n
+           Tamaño:{size}\n
+           URL descarga:{item['url']}\n\n
+
+           """
+    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
+    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+        file.write(string)
 
 
 # Descargar datos del censo del siglo XXI
 for item in ccpv_siglo_XXI:
-    descargar_archivo_zip(item["url"], file_name="",folder="CENSOS DE POBLACION Y VIVIENDA")
+    folder="CENSOS DE POBLACION Y VIVIENDA"
+    descargar_archivo_zip(item["url"], file_name="",folder=folder_path)
+    download_date = datetime.now().strftime("%Y-%m-%d")
+    format=formato_de_archivo(item["url"])
+    size=os.path.getsize(f"{folder_path}/{item['file_name']}")
+    string=f"""
+           Nombre:{item['file_name']}\n
+           Fecha de descarga:{download_date}\n
+           Formato:{format}\n
+           Tamaño:{size}\n
+           URL descarga:{item['url']}\n\n
+
+           """
+    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
+    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+        file.write(string)
 
 # Encuesta Nacional Sobre Acceso y Permanencia en la Educación 2021
 enape_2021=[
@@ -149,7 +203,22 @@ enape_2021=[
 
 # Descargar datos del ENAPE
 for item in enape_2021:
-        descargar_archivo_zip(item["url"],file_name="",folder="ENCUESTA NACIONAL SOBRE ACCESO Y PERMANENCIA EN LA EDUCACION 2021")
+    folder="ENCUESTA NACIONAL SOBRE ACCESO Y PERMANENCIA EN LA EDUCACION 2021"
+    descargar_archivo_zip(item["url"],file_name="",folder=folder)
+    download_date = datetime.now().strftime("%Y-%m-%d")
+    format=formato_de_archivo(item["url"])
+    size=os.path.getsize(f"{folder_path}/{item['file_name']}")
+    string=f"""
+           Nombre:{item['file_name']}\n
+           Fecha de descarga:{download_date}\n
+           Formato:{format}\n
+           Tamaño:{size}\n
+           URL descarga:{item['url']}\n\n
+
+           """
+    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
+    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+        file.write(string)        
 
 # Enlace de reporte SEP indicadores educativos 2023
 sep_2023=[
