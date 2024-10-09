@@ -1,5 +1,5 @@
 ![MCD](https://mcd.unison.mx/wp-content/themes/awaken/img/logo_mcd.png)
-# Proyecto de ingeniería de características 
+# Educación y Salud Mental en México 
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
@@ -13,7 +13,7 @@ Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos 
 
 *¿ Habrá alguna correlación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
 
-*¿ En que parte de la republica es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+*¿ En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
 
 Esperamos poder hallar resolución a estas incognitas y lograr comunicar nuestros hallazgos tanto al público general como directivos del área de educación.
 
