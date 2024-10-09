@@ -53,6 +53,7 @@ def create_conda_env():
     if os.path.exists("environment.yml"):
         print("Creando entorno conda desde environment.yml...")
         subprocess.run(["conda", "env", "create", "-f", "environment.yml"])
+        subprocess.run(["conda", "run", "-n", "virtualEnvIngCarac", "python3", "--version"])
     else:
         print("El archivo environment.yml no existe.")
 
