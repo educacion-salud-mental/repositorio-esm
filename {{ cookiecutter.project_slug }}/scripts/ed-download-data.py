@@ -129,22 +129,22 @@ ccpv_siglo_XXI= [
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2000/datosabiertos/cgpv2000_iter_00_csv.zip",
             "data": "REFUT1MgU0lHTE8gWFhJ",
-            "file_name": "cgpv2000_iter_00_csv.zip"
+            "file_name": "cgpv2000_iter_00"
         },
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2005/datosabiertos/cpv2005_iter_00_csv.zip",
             "data": "REFUT1MgU0lHTE8gWFhJ",
-            "file_name": "cpv2005_iter_00_csv.zip"
+            "file_name": "cpv2005_iter_00"
         },
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2010/datosabiertos/iter_nal_2010_csv.zip",
             "data": "REFUT1MgU0lHTE8gWFhJ",
-            "file_name": "iter_nal_2010_csv.zip"
+            "file_name": "iter_00_cpv2010"
         },
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/2020/datosabiertos/iter/iter_00_cpv2020_csv.zip",
             "data": "REFUT1MgU0lHTE8gWFhJ",
-            "file_name": "iter_00_cpv2020_csv.zip"
+            "file_name": "iter_00_cpv2020"
         }
     ]
 
@@ -174,7 +174,7 @@ for item in ccpv_siglo_XX:
 # Descargar datos del censo del siglo XXI
 for item in ccpv_siglo_XXI:
     folder="CENSOS DE POBLACION Y VIVIENDA"
-    descargar_archivo_zip(item["url"], file_name="",folder=folder_path)
+    descargar_archivo_zip(item["url"], file_name="",folder=folder)
     download_date = datetime.now().strftime("%Y-%m-%d")
     format=formato_de_archivo(item["url"])
     size=os.path.getsize(f"{folder_path}/{item['file_name']}")
@@ -196,15 +196,17 @@ enape_2021=[
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/enape/2021/datosabiertos/conjunto_de_datos_enape_2021_csv.zip",
             "data": "RU5DVUVTVEEgTkFDSU9OQUwgU09CUkUgQUNDRVNPIFkgUEVSTUFORU5DSUEgRU4gTEEgRURVQ0FDSU9OIDIwMjE=",
-            "file_name": "conjunto_de_datos_enape_2021_csv.zip"
+            "file_name": "conjunto_de_datos_enape_2021"
         }
         
     ]
 
 # Descargar datos del ENAPE
+
 for item in enape_2021:
     folder="ENCUESTA NACIONAL SOBRE ACCESO Y PERMANENCIA EN LA EDUCACION 2021"
-    descargar_archivo_zip(item["url"],file_name="",folder=folder)
+    folder_path=f"{data_path}/{folder}"
+    descargar_archivo_zip(item["url"],file_name=item['file_name'],folder=folder)
     download_date = datetime.now().strftime("%Y-%m-%d")
     format=formato_de_archivo(item["url"])
     size=os.path.getsize(f"{folder_path}/{item['file_name']}")
@@ -238,3 +240,5 @@ command = (
 )
 
 execute=subprocess.run(command,shell=True,capture_output=True,text=True)
+print(execute.stdout)
+print(execute.stderr)
