@@ -1,8 +1,11 @@
-# Define variables
+# Variables definidas
 VENV_DIR=venv
 PYTHON=python3
 REQUIREMENTS=requirements.txt
-SCRIPT=your_script.py  # Reemplaza con el nombre de tu archivo .py
+DOWNLOAD_SCRIPT_ED=ed-download-data.py  
+DOWNLOAD_SCRIPT_SM=sm-download-data.py
+PROCESS_SCRIPT_ED=ed-proc-data.py
+PROCESS_SCRIPT_SM=sm-inter-proc-data.py
 
 # Detectar sistema operativo
 ifeq ($(OS),Windows_NT)
@@ -31,6 +34,24 @@ install: venv
 # Regla para ejecutar el script
 run: install
 	$(PYTHON_EXEC) $(SCRIPT)
+
+
+# Reglas para descargar datos
+download educacion:install
+	$(PYTHON_EXEC) $(DOWNLOAD_SCRIPT_ED)
+
+download salud:install
+	$(PYTHON_EXEC) $(DOWNLOAD_SCRIPT_SM)
+
+# Reglas para procesar datos
+process educacion:install
+	$(PYTHON_EXEC) $(PROCESS_SCRIPT_ED)
+
+process salud:install
+	$(PYTHON_EXEC) $(PROCESS_SCRIPT_SM)
+
+
+
 
 # Regla para limpiar el ambiente virtual
 clean:
