@@ -5,15 +5,16 @@
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
-Este proyecto se creó para completar asignaciones dentro de la maestría en ciencia de datos. Se analizará una posible relación entre el campo de salud mental y el de la educación en la población méxicana juvenil. 
 
 **Objetivo**
 
-Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos que nos ayuden responder de manera satisfactoria las preguntas: 
+Este proyecto se creó para completar asignaciones dentro de la maestría en ciencia de datos. Se analizará una posible relación entre el campo de salud mental y el de la educación en la población méxicana juvenil. Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos que nos ayuden responder de manera satisfactoria las preguntas: 
 
-*¿ Habrá alguna correlación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
+*¿Habrá alguna relación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
 
-*¿ En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+*¿En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+
+*¿Existe alguna relación entre la pertenencia en la escuela y la salud mental en la población juvenil mexicana?*
 
 Esperamos poder hallar resolución a estas incognitas y lograr comunicar nuestros hallazgos tanto al público general como directivos del área de educación.
 
