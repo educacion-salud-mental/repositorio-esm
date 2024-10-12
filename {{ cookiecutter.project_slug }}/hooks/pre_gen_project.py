@@ -1,3 +1,4 @@
+'''
 import os
 import subprocess
 import sys
@@ -73,3 +74,9 @@ else:
 
 # Crear entorno conda a partir del archivo environment.yml
 create_conda_env()
+
+'''
+
+
+if __name__ == "__main__":
+    print("se ejecuta pre")

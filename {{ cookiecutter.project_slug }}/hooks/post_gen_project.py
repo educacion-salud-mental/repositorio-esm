@@ -1,4 +1,5 @@
-import os
+'''
+    import os
 import subprocess
 
 def init_git_repo():
@@ -46,3 +47,7 @@ if remote_url:
     push_to_remote()
 else:
     print("No se proporcionó la URL del repositorio remoto. No se hará push.")
+'''
+
+if __name__ == "__main__":
+    print("se ejecuta post")
