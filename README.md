@@ -69,19 +69,17 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 
 2. Luego, se instalan las dependencias especificadas dentro del archivo 'requirements.txt':
     ```bash
-    make install requirements
+    make install 
     ```
 
 3. Se descargan los dos conjuntos de datos:
     ```bash
-    make download educacion
-    make download salud
+    make download 
     ```
 
 4. Se procesan los dos conjuntos de datos:
     ```bash
-    make process educacion
-    make process salud
+    make process
     ```
 
 

@@ -2,10 +2,10 @@
 VENV_DIR=venv
 PYTHON=python3
 REQUIREMENTS=requirements.txt
-DOWNLOAD_SCRIPT_ED=ed-download-data.py  
-DOWNLOAD_SCRIPT_SM=sm-download-data.py
-PROCESS_SCRIPT_ED=ed-proc-data.py
-PROCESS_SCRIPT_SM=sm-inter-proc-data.py
+DOWNLOAD_SCRIPT_ED=\{\{\ cookiecutter.project_slug\ \}\}/scripts/ed-download-data.py  
+DOWNLOAD_SCRIPT_SM=\{\{\ cookiecutter.project_slug\ \}\}/scripts/sm-download-data.py
+PROCESS_SCRIPT_ED=\{\{\ cookiecutter.project_slug\ \}\}/scripts/ed-proc-data.py
+PROCESS_SCRIPT_SM=\{\{\ cookiecutter.project_slug\ \}\}/scripts/sm-inter-proc-data.py
 
 # Detectar sistema operativo
 ifeq ($(OS),Windows_NT)
@@ -16,8 +16,8 @@ ifeq ($(OS),Windows_NT)
 else
     # Comandos para macOS/Linux
     VENV_ACTIVATE=$(VENV_DIR)/bin/activate
-    PYTHON_EXEC=$(VENV_DIR)/bin/python
-    PIP_EXEC=$(VENV_DIR)/bin/pip
+    PYTHON_EXEC=$(VENV_DIR)/bin/python3
+    PIP_EXEC=$(VENV_DIR)/bin/pip3
 endif
 
 # Regla principal para ejecutar todo
@@ -28,27 +28,24 @@ venv:
 	$(PYTHON) -m venv $(VENV_DIR)
 
 # Regla para instalar dependencias
-install requirements: venv
-	$(PIP_EXEC) install -r $(REQUIREMENTS)
+install: venv
+	$(PIP_EXEC) install --upgrade pip setuptools wheel
+	$(PIP_EXEC) install -r $(REQUIREMENTS) -v
 
 
 # Reglas para descargar datos
-download educacion:install
+download:install
 	$(PYTHON_EXEC) $(DOWNLOAD_SCRIPT_ED)
-
-download salud:install
 	$(PYTHON_EXEC) $(DOWNLOAD_SCRIPT_SM)
 
 # Reglas para procesar datos
-process educacion:install
+process:install
 	$(PYTHON_EXEC) $(PROCESS_SCRIPT_ED)
-
-process salud:install
 	$(PYTHON_EXEC) $(PROCESS_SCRIPT_SM)
 
 
-
-
+run:download process
+	@echo "Datos descargados y procesados correctamente!"
 # Regla para limpiar el ambiente virtual
 clean:
 	rm -rf $(VENV_DIR)

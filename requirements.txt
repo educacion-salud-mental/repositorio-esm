@@ -1,4 +1,3 @@
-python-dateutil
 requests
 pandas
 numpy
@@ -9,5 +8,4 @@ httpx
 aiohttp
 urllib3
 palettable
-dateutil
-zipfile
+python-dateutil
