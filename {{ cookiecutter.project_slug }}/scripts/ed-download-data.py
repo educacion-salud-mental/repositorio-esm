@@ -166,8 +166,8 @@ for item in ccpv_siglo_XX:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
-    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)
 
 
@@ -186,8 +186,8 @@ for item in ccpv_siglo_XXI:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
-    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)
 
 # Encuesta Nacional Sobre Acceso y Permanencia en la Educación 2021
@@ -218,8 +218,8 @@ for item in enape_2021:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{folder_path}/descriptions", exist_ok=True)
-    with open(f"{folder_path}/descriptions/{item['file_name']}_details.txt",'w') as file:
+    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)        
 
 # Enlace de reporte SEP indicadores educativos 2023

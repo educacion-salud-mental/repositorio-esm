@@ -28,8 +28,8 @@ for item in os.listdir(work_directory):
             match = re.search(pattern,subitem)
             if match:
                 dictionary_name=match.group()
-
-        data_dictionary_path=f"{item_path}/{dictionary_name}/{os.listdir(f"{item_path}/{dictionary_name}")[0]}"
+        dictionary= os.listdir(f'{item_path}/{dictionary_name}')[0]
+        data_dictionary_path=f"{item_path}/{dictionary_name}/{dictionary}"
         dictionary_df=pd.read_csv(data_dictionary_path,encoding='ISO-8859-1')
         diccionarios_de_datos.append(dictionary_df)
     # En este caso particular, el resto de los archivos son de tipo excel
