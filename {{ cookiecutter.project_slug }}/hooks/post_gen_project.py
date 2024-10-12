@@ -1,3 +1,5 @@
+'''
+
 import os
 import subprocess
 
@@ -46,3 +48,12 @@ if remote_url:
     push_to_remote()
 else:
     print("No se proporcionó la URL del repositorio remoto. No se hará push.")
+
+
+'''
+
+def main():
+    print("se ejecuta post")
+
+if __name__ == "__main__":
+    main()
