@@ -108,3 +108,7 @@ conda create --name nombreEntornoVirtual -> crea el entorno virtual
 conda activate nombreEntornoVirtual -> activa el entorno virtual
 conda deactivate -> en caso de quere salir del entorno virtual es posible desactivarlo para volver al entorno base
 conda env update --file environment.yml -> actualiza el archivo environment.yml en caso de instalar más paquetes o librerías
+
+```
+# Licencia
+Este proyecto se rige bajo la licencia de MIT.
