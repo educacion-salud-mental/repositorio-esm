@@ -1,23 +1,39 @@
-# Nombre del entorno conda
-CONDA_ENV = virtualEnvIngCarac
+# Define variables
+VENV_DIR=venv
+PYTHON=python3
+REQUIREMENTS=requirements.txt
+SCRIPT=your_script.py  # Reemplaza con el nombre de tu archivo .py
 
-# Archivo de entorno para Anaconda (puede ser environment.yml)
-ENV_FILE = environment.yml
+# Detectar sistema operativo
+ifeq ($(OS),Windows_NT)
+    # Comandos para Windows
+    VENV_ACTIVATE=$(VENV_DIR)\Scripts\activate.bat
+    PYTHON_EXEC=$(VENV_DIR)\Scripts\python
+    PIP_EXEC=$(VENV_DIR)\Scripts\pip
+else
+    # Comandos para macOS/Linux
+    VENV_ACTIVATE=$(VENV_DIR)/bin/activate
+    PYTHON_EXEC=$(VENV_DIR)/bin/python
+    PIP_EXEC=$(VENV_DIR)/bin/pip
+endif
 
-# Nombre del script que descarga los datoså
-DOWNLOAD_SCRIPT = sm-inter-proc-data.py
+# Regla principal para ejecutar todo
+all: venv install run
 
-# Crear el entorno conda a partir de un archivo environment.yml
-.PHONY: conda_env
-conda_env:
-	conda env create -f $(ENV_FILE) --name $(CONDA_ENV)
+# Regla para crear un ambiente virtual
+venv:
+	$(PYTHON) -m venv $(VENV_DIR)
 
-# Activar el entorno conda e instalar dependencias desde requirements.txt si no usas environment.yml
-.PHONY: install
-install: conda_env
-	conda activate $(CONDA_ENV) 
+# Regla para instalar dependencias
+install: venv
+	$(PIP_EXEC) install -r $(REQUIREMENTS)
 
-# Ejecutar el script de descarga de datos con el entorno conda activado
-.PHONY: download
-download: install
-	conda run -n $(CONDA_ENV) python3 $(DOWNLOAD_SCRIPT) 
+# Regla para ejecutar el script
+run: install
+	$(PYTHON_EXEC) $(SCRIPT)
+
+# Regla para limpiar el ambiente virtual
+clean:
+	rm -rf $(VENV_DIR)
+
+.PHONY: all venv install run clean
