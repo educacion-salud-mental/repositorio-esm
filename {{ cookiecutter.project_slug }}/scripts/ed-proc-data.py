@@ -1239,4 +1239,6 @@ df=df[~((df['Longitud']==', LA')|((df['Longitud']==', LA (R')))] # Solo dos regi
 formato_columnas(df,format_columns)
 processed_dataframes.append(['2020',df])
 
-
+for df in processed_dataframes:
+    file_path=f"{{{{ cookiecutter.project_slug }}}}/Data/processed/{df[0]}.csv"
+    df[1].to_csv(file_path)
