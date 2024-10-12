@@ -1,0 +1,13 @@
+python-dateutil
+requests
+pandas
+numpy
+geopandas
+seaborn
+matplotlib
+httpx
+aiohttp
+urllib3
+palettable
+dateutil
+zipfile

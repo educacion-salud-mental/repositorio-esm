@@ -5,8 +5,7 @@ from io import BytesIO
 from datetime import datetime
 import subprocess
 
-working_directory=".."
-data_path="./Data/raw/DATOS EDUCACION"
+data_path="{{ cookiecutter.project_slug }}/Data/raw/DATOS EDUCACION"
 
 def nombre_archivo(url):
     """
@@ -85,7 +84,7 @@ def descargar_archivo_xlsx(url,file_name,folder=""):
     else:
         print('Error al intentar descargar el archivo, status code:', response.status_code)
 
-os.chdir(working_directory)
+
 
 #Enlaces de Censos de Población:
 
@@ -166,7 +165,7 @@ for item in ccpv_siglo_XX:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    os.makedirs(f"{data_path}/descriptions/{folder}", exist_ok=True)
     with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)
 
@@ -186,7 +185,7 @@ for item in ccpv_siglo_XXI:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    os.makedirs(f"{data_path}/descriptions/{folder}", exist_ok=True)
     with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)
 
@@ -218,7 +217,7 @@ for item in enape_2021:
            URL descarga:{item['url']}\n\n
 
            """
-    os.makedirs(f"{data_path}/descriptions", exist_ok=True)
+    os.makedirs(f"{data_path}/descriptions/{folder}", exist_ok=True)
     with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)        
 
@@ -233,7 +232,7 @@ sep_2023=[
 # Descarga reporte del SEP 2023
 # Hubo un problema con la descarga normal, entonces se descargaron los datos con el shell
 command = (
-    'cd "Data/raw/DATOS EDUCACION" && '
+    'cd "{{ cookiecutter.project_slug }}/Data/raw/DATOS EDUCACION" && '
     'mkdir "REPORTE DE INDICADORES EDUCATIVOS" && '
     'cd "REPORTE DE INDICADORES EDUCATIVOS" && '
     'curl -O https://www.planeacion.sep.gob.mx/Doc/estadistica_e_indicadores/indicadores/reporte_indicadores_educativos_sep_2023.xls'

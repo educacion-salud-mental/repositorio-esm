@@ -5,22 +5,23 @@
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
 </a>
 
-Este proyecto se creó para completar asignaciones dentro de la maestría en ciencia de datos. Se analizará una posible relación entre el campo de salud mental y el de la educación en la población méxicana juvenil. 
 
 **Objetivo**
 
-Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos que nos ayuden responder de manera satisfactoria las preguntas: 
+Este proyecto se creó para completar asignaciones dentro de la maestría en ciencia de datos. Se analizará una posible relación entre el campo de salud mental y el de la educación en la población méxicana juvenil. Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos que nos ayuden responder de manera satisfactoria las preguntas: 
 
-*¿ Habrá alguna correlación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
+*¿Habrá alguna relación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
 
-*¿ En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+*¿En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+
+*¿Existe alguna relación entre la pertenencia en la escuela y la salud mental en la población juvenil mexicana?*
 
 Esperamos poder hallar resolución a estas incognitas y lograr comunicar nuestros hallazgos tanto al público general como directivos del área de educación.
 
 **Acerca de las fuentes de datos**
 
-Para la información relacionada con la educación en México, optamos por utilizar los resultados de encuestas del INEGI y un reporte del SEP de indicadores educativos:
-Nos apoyaremos del Censo General de Población y Vivienda de varios años para obtener información georeferencial y temporal sobre la población méxicana que estudia. La Encuesta Nacional sobre Acceso y Permanencia en la Educación (ENAPE) 2021 nos permitrá generar información estadística sobre el acceso y permanencia de la población de 0 a 29 años en el Sistema Educativo Nacional.
+Para la información relacionada con la educación en México, optamos por utilizar los resultados de encuestas del INEGI y un reporte del [SEP de indicadores educativos del 2023](https://www.planeacion.sep.gob.mx/indicadorespronosticos.aspx):
+Nos apoyaremos del [Censo General de Población y Vivienda](https://www.inegi.org.mx/programas/ccpv/2020/) de varios años para obtener información georeferencial y temporal sobre la población méxicana que estudia. La [Encuesta Nacional sobre Acceso y Permanencia en la Educación (ENAPE) 2021](https://www.inegi.org.mx/programas/enape/2021/#tabulados) nos permitrá generar información estadística sobre el acceso y permanencia de la población de 0 a 29 años en el Sistema Educativo Nacional.
 
 Mientras que para los datos relacionados con la salud mental se tomó como fuente principal la Encuesta Nacional de Salud y Nutrición, ENSANUT, la cual se inició en año 2000. Se planeaba hacerla cada 6 años, sin embargo se realizó también en el 2016 y se lleva haciendo cada año desde el 2020. Dicha entrevista tiene dos apartados, salud y nutrición, y cada uno de estos se divide en adolesentes y mayores de 20 años en este proyecto se recauda cada catálogo de datos y los resultados de cada cuestionario de datos realizado, estos últimos se analizarán para saber si existe información sobre la salud mental de nuestros dos grupos de edades.
 
@@ -57,16 +58,9 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 --------
 
 
-# Guía de Instalación y Uso de Anaconda
+## Guía de Configuración del Entorno
 
-## Requisitos Previos
-Para seguir esta guía, necesitarás acceso a Internet y permisos de instalación en tu sistema.
-
-----------------
-
-# Guía de Configuración del Entorno
-
-Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
+Para seguir esta guía, se necesita acceso al internet y permisos de instalación. Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
 
 ## 1. Verificación e Instalación de Anaconda
 
@@ -107,3 +101,7 @@ conda create --name nombreEntornoVirtual -> crea el entorno virtual
 conda activate nombreEntornoVirtual -> activa el entorno virtual
 conda deactivate -> en caso de quere salir del entorno virtual es posible desactivarlo para volver al entorno base
 conda env update --file environment.yml -> actualiza el archivo environment.yml en caso de instalar más paquetes o librerías
+
+```
+# Licencia
+Este proyecto se rige bajo la licencia de MIT.
