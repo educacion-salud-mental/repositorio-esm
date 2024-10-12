@@ -5,8 +5,7 @@ from io import BytesIO
 from datetime import datetime
 import subprocess
 
-working_directory=".."
-data_path="./Data/raw/DATOS EDUCACION"
+data_path="{{ cookiecutter.project_slug }}/Data/raw/DATOS EDUCACION"
 
 def nombre_archivo(url):
     """
@@ -85,7 +84,7 @@ def descargar_archivo_xlsx(url,file_name,folder=""):
     else:
         print('Error al intentar descargar el archivo, status code:', response.status_code)
 
-os.chdir(working_directory)
+
 
 #Enlaces de Censos de Población:
 
