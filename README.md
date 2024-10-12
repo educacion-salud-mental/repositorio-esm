@@ -58,20 +58,9 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 --------
 
 
-# Guía de Instalación y Uso de Anaconda
+## Guía de Configuración del Entorno
 
-## Requisitos Previos
-Para seguir esta guía, se necesita acceso al internet y permisos de instalación. Para ejecutar el proyecto,se requieren los siguientes módulos de python:
-* Python 3.9.6+
-* Pandas 2.1.4
-* Requests 2.32
-* Openpyxl 3.1.5
-
-----------------
-
-# Guía de Configuración del Entorno
-
-Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
+Para seguir esta guía, se necesita acceso al internet y permisos de instalación. Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
 
 ## 1. Verificación e Instalación de Anaconda
 
