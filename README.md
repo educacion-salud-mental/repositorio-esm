@@ -45,63 +45,45 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 │        
 ├── models             <- Trained and serialized models, model predictions, or model summaries
 ├── pipelines          <- Data processing pipelines or trained and serialized models
-├── evaluetion         <- Model evaluations, metrics, and reports
+├── evaluation         <- Model evaluations, metrics, and reports
 │
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+├── scripts         <- Useful scripts used for downloading,processing or visualizing data.
 │
 ```
 
 --------
 
 
-## Guía de Configuración del Entorno
+## Ejecutando proyecto
 
-Para seguir esta guía, se necesita acceso al internet y permisos de instalación. Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
-
-## 1. Verificación e Instalación de Anaconda
-
-### Verificar si Anaconda está instalado:
-1. Abre una terminal y ejecuta el siguiente comando:
+1. Primero se tiene que creear el entorno ejecutando:
 
     ```bash
-    conda --version
+    make venv
     ```
 
-2. Si el comando anterior muestra una versión de Conda, significa que Anaconda está instalada. Si no aparece, sigue los pasos de instalación a continuación.
-
-### Instalación de Anaconda:
-1. Descarga el instalador de Anaconda desde [aquí](https://www.anaconda.com/products/individual#download-section).
-2. Ejecuta el instalador y sigue las instrucciones en pantalla.
-3. Reinicia tu terminal y verifica la instalación con el siguiente comando:
-
+2. Luego, se instalan las dependencias especificadas dentro del archivo 'requirements.txt':
     ```bash
-    conda --version
+    make install requirements
     ```
 
-## 2. Instalación de Python
-
-1. Python viene incluido con Anaconda. Para verificar la versión de Python instalada, ejecuta:
-
+3. Se descargan los dos conjuntos de datos:
     ```bash
-    python --version
+    make download educacion
+    make download salud
     ```
 
-2. Si deseas instalar una versión específica de Python, puedes hacerlo creando un ambiente con esa versión (ver el siguiente paso).
+4. Se procesan los dos conjuntos de datos:
+    ```bash
+    make process educacion
+    make process salud
+    ```
 
-## 3. Crear un Ambiente Virtual con Anaconda
 
-Para crear un ambiente virtual con Anaconda, ejecuta el siguiente comando, reemplazando `nombreEntornoVirtual` con el nombre que deseas para tu ambiente y `3.x` con la versión de Python que desees (si es necesario):
-
-```bash
-conda create --name nombreEntornoVirtual -> crea el entorno virtual
-conda activate nombreEntornoVirtual -> activa el entorno virtual
-conda deactivate -> en caso de quere salir del entorno virtual es posible desactivarlo para volver al entorno base
-conda env update --file environment.yml -> actualiza el archivo environment.yml en caso de instalar más paquetes o librerías
-
-```
 # Licencia
 Este proyecto se rige bajo la licencia de MIT.

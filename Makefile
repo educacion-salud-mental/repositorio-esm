@@ -28,12 +28,8 @@ venv:
 	$(PYTHON) -m venv $(VENV_DIR)
 
 # Regla para instalar dependencias
-install: venv
+install requirements: venv
 	$(PIP_EXEC) install -r $(REQUIREMENTS)
-
-# Regla para ejecutar el script
-run: install
-	$(PYTHON_EXEC) $(SCRIPT)
 
 
 # Reglas para descargar datos
