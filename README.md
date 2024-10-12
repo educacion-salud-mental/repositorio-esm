@@ -62,10 +62,10 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 
 ## Requisitos Previos
 Para seguir esta guía, se necesita acceso al internet y permisos de instalación. Para ejecutar el proyecto,se requieren los siguientes módulos de python:
--Python 3.9.6+
--Pandas 2.1.4
--Requests 2.32
--Openpyxl 3.1.5
+* Python 3.9.6+
+* Pandas 2.1.4
+* Requests 2.32
+* Openpyxl 3.1.5
 
 ----------------
 
