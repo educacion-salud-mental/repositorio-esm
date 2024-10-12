@@ -1,4 +1,5 @@
-# Proyecto de ingeniería de características 
+![MCD](https://mcd.unison.mx/wp-content/themes/awaken/img/logo_mcd.png)
+# Educación y Salud Mental en México 
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
@@ -12,7 +13,7 @@ Nuestro objetivo con este proyecto es lograr encontrar relaciones y/o hallazgos 
 
 *¿ Habrá alguna correlación entre el desempeño acádemico y la salud mental de los estudiantes jovenes?*
 
-*¿ En que parte de la republica es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
+*¿ En que parte de la república es más probable de abandonar la escuela, y/o tener problemas de salud mental?¿Estarán relacionados/vínculados?*
 
 Esperamos poder hallar resolución a estas incognitas y lograr comunicar nuestros hallazgos tanto al público general como directivos del área de educación.
 
@@ -42,16 +43,67 @@ Posteriormente se buscará la manera de unir la información de educación y sal
 │                         proyecto.
 │        
 ├── models             <- Trained and serialized models, model predictions, or model summaries
+├── pipelines          <- Data processing pipelines or trained and serialized models
+├── evaluetion         <- Model evaluations, metrics, and reports
 │
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
-│
-├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         salud_mental-educacion and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
 ```
 
 --------
+
+
+# Guía de Instalación y Uso de Anaconda
+
+## Requisitos Previos
+Para seguir esta guía, necesitarás acceso a Internet y permisos de instalación en tu sistema.
+
+----------------
+
+# Guía de Configuración del Entorno
+
+Este documento proporciona los pasos necesarios para instalar Anaconda, Python, crear y activar un ambiente virtual con Anaconda, y ejecutar un archivo `environment.yml` usando Conda.
+
+## 1. Verificación e Instalación de Anaconda
+
+### Verificar si Anaconda está instalado:
+1. Abre una terminal y ejecuta el siguiente comando:
+
+    ```bash
+    conda --version
+    ```
+
+2. Si el comando anterior muestra una versión de Conda, significa que Anaconda está instalada. Si no aparece, sigue los pasos de instalación a continuación.
+
+### Instalación de Anaconda:
+1. Descarga el instalador de Anaconda desde [aquí](https://www.anaconda.com/products/individual#download-section).
+2. Ejecuta el instalador y sigue las instrucciones en pantalla.
+3. Reinicia tu terminal y verifica la instalación con el siguiente comando:
+
+    ```bash
+    conda --version
+    ```
+
+## 2. Instalación de Python
+
+1. Python viene incluido con Anaconda. Para verificar la versión de Python instalada, ejecuta:
+
+    ```bash
+    python --version
+    ```
+
+2. Si deseas instalar una versión específica de Python, puedes hacerlo creando un ambiente con esa versión (ver el siguiente paso).
+
+## 3. Crear un Ambiente Virtual con Anaconda
+
+Para crear un ambiente virtual con Anaconda, ejecuta el siguiente comando, reemplazando `nombreEntornoVirtual` con el nombre que deseas para tu ambiente y `3.x` con la versión de Python que desees (si es necesario):
+
+```bash
+conda create --name nombreEntornoVirtual -> crea el entorno virtual
+conda activate nombreEntornoVirtual -> activa el entorno virtual
+conda deactivate -> en caso de quere salir del entorno virtual es posible desactivarlo para volver al entorno base
+conda env update --file environment.yml -> actualiza el archivo environment.yml en caso de instalar más paquetes o librerías
