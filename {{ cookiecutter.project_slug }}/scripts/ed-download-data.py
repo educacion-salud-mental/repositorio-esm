@@ -5,7 +5,7 @@ from io import BytesIO
 from datetime import datetime
 import subprocess
 
-data_path="{{ cookiecutter.project_slug }}/Data/raw/DATOS EDUCACION"
+data_path = os.path.join('..', 'Data', 'raw', 'DATOS EDUCACION')
 
 def nombre_archivo(url):
     """
@@ -87,7 +87,6 @@ def descargar_archivo_xlsx(url,file_name,folder=""):
 
 
 #Enlaces de Censos de Población:
-
 ccpv_siglo_XX= [
         {
             "url": "https://www.inegi.org.mx/contenidos/programas/ccpv/1950/tabulados/cgp50_nal_educacion.xlsx",
@@ -188,7 +187,6 @@ for item in ccpv_siglo_XXI:
     os.makedirs(f"{data_path}/descriptions/{folder}", exist_ok=True)
     with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)
-
 # Encuesta Nacional Sobre Acceso y Permanencia en la Educación 2021
 enape_2021=[
 
@@ -205,10 +203,10 @@ enape_2021=[
 for item in enape_2021:
     folder="ENCUESTA NACIONAL SOBRE ACCESO Y PERMANENCIA EN LA EDUCACION 2021"
     folder_path=f"{data_path}/{folder}"
-    descargar_archivo_zip(item["url"],file_name=item['file_name'],folder=folder)
+    descargar_archivo_zip(item["url"],file_name='',folder=folder)
     download_date = datetime.now().strftime("%Y-%m-%d")
     format=formato_de_archivo(item["url"])
-    size=os.path.getsize(f"{folder_path}/{item['file_name']}")
+    size=os.path.getsize(os.path.join('..', 'Data', 'raw', 'DATOS EDUCACION', folder))
     string=f"""
            Nombre:{item['file_name']}\n
            Fecha de descarga:{download_date}\n
@@ -221,23 +219,30 @@ for item in enape_2021:
     with open(f"{data_path}/descriptions/{folder}/{item['file_name']}_details.txt",'w') as file:
         file.write(string)        
 
-# Enlace de reporte SEP indicadores educativos 2023
-sep_2023=[
-        {
-            "url": "https://www.planeacion.sep.gob.mx/Doc/estadistica_e_indicadores/indicadores/reporte_indicadores_educativos_sep_2023.xls",
-            "data": "UkVQT1JURSBERSBJTkRJQ0FET1JFUyBFRFVDQVRJVk9T",
-            "file_name": "reporte_indicadores_educativos_sep_2023.xls"
-        }
-    ]
-# Descarga reporte del SEP 2023
 # Hubo un problema con la descarga normal, entonces se descargaron los datos con el shell
+url_rep = 'https://www.planeacion.sep.gob.mx/Doc/estadistica_e_indicadores/indicadores/reporte_indicadores_educativos_sep_2023.xls'
+name_rep = 'reporte_indicadores_educativos_sep_2023.xls'
 command = (
-    'cd "{{ cookiecutter.project_slug }}/Data/raw/DATOS EDUCACION" && '
+    f'cd "{data_path}" && '
     'mkdir "REPORTE DE INDICADORES EDUCATIVOS" && '
     'cd "REPORTE DE INDICADORES EDUCATIVOS" && '
     'curl -O https://www.planeacion.sep.gob.mx/Doc/estadistica_e_indicadores/indicadores/reporte_indicadores_educativos_sep_2023.xls'
 )
 
-execute=subprocess.run(command,shell=True,capture_output=True,text=True)
-print(execute.stdout)
-print(execute.stderr)
+# Ejecutar el comando
+execute = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+download_date = datetime.now().strftime("%Y-%m-%d")
+format=formato_de_archivo(url_rep)
+size=os.path.getsize(os.path.join('..', 'Data', 'raw', 'DATOS EDUCACION','REPORTE DE INDICADORES EDUCATIVOS'))
+string=f"""
+        Nombre: {name_rep}\n
+        Fecha de descarga:{download_date}\n
+        Formato:{format}\n
+        Tamaño:{size}\n
+        URL descarga:{url_rep}\n\n
+
+           """
+os.makedirs(f"{data_path}/descriptions/REPORTE DE INDICADORES EDUCATIVOS", exist_ok=True)
+with open(f"{data_path}/descriptions/REPORTE DE INDICADORES EDUCATIVOS/{name_rep}_details.txt",'w') as file:
+    file.write(string)  
